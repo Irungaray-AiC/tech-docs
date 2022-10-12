@@ -1,3 +1,19 @@
+## Orden:
+En líneas generales, un componente debería estar estructurado de la siguiente manera:
+- Imports
+- Declaracion de función de componente
+- Props destructuradas
+- Estados
+- Requests
+- useEffects
+- Variables útiles para el JSX
+- Estilos destructurados
+- Return early (error, loading, etc)
+- Return JSX
+- {JSX}
+- PropTypes
+- Export
+
 ### Imports
 Imports correctamente separados por tipo (External Components, Utils & Config, Internal Components)
 
@@ -41,7 +57,7 @@ Para mejorar la legibilidad y la rápida comprensión del código, los estados e
 
     // Data States
     const [countryOptions, setCountryOptions] = useState([]);
-   
+
 ```
 
 ### Funciones asíncronas
@@ -89,7 +105,7 @@ Inmediatamente después de los estados. Las llamadas al backend dan la mayor pau
         send();
     };
  ```
- 
+
 ### useEffects
 Por lo general, en los useEffect se ejecutan los llamados al backend, de manera que es bueno tenerlos inmediatamente después de las funciones asíncronas
 
@@ -153,10 +169,17 @@ Es recomendable manejar desde la hoja de estilos todo lo que se pueda manejar de
         _link,
     } = useStyles({ isMobile });
 ```
-    
- ### Código JSX
- Sin estilos en línea. Sin escatimar saltos de línea. Componentizando lo que amerite.
-    
+
+
+### Early Return
+Siempre que la UI lo permita, de esta manera nos ahorramos la primer capa de ternarios en el componente.
+```javascript
+        if (loading) return <Loader size={20} />
+        if (error) return <ErrorScreen error={errCode} />
+```
+
+### Código JSX
+Sin estilos en línea. Sin escatimar saltos de línea. Componentizando lo que amerite.
 ```javascript
         return (
         <Box className={_root}>
@@ -232,7 +255,6 @@ const initialFormValues = {
 const SubmitStatusEnum = {
     IDLE: null,
     SENDING: 'SENDING',
-    
     SENT: 'SENT',
     ERROR: 'ERROR',
 };
@@ -270,4 +292,4 @@ GoodComponent.defaultProps = {
 
 export default ContactForm;
 ```
-    
+
