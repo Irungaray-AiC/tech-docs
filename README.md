@@ -80,7 +80,7 @@ Es recomendable también usar PropTypes. Además de proveer un mínimo tipado, n
 
 ### [**Bad Component**](https://github.com/Irungaray-AiC/tech-docs/blob/main/BadComponent.jsx) - [**Good Component**](https://github.com/Irungaray-AiC/tech-docs/blob/main/GoodComponent.jsx)
 
-### [**Anatomy of a Bad Component**](https://github.com/Irungaray-AiC/tech-docs/blob/main/BadComponent.jsx) - [**Anatomy of a Good Component**](https://github.com/Irungaray-AiC/tech-docs/blob/main/GoodComponent.jsx)
+### [**Anatomy of a Good Component**](https://github.com/Irungaray-AiC/tech-docs/blob/main/AnatomyOfAGoodComponent.md)
 
 </div>
 
