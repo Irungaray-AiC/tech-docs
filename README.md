@@ -50,6 +50,10 @@ Es recomendable también usar PropTypes. Además de proveer un mínimo tipado, n
 
 - Usar try/catch en vez de promises
 
+- Evitar la horizontalidad del código **(6)**
+
+- Evitar tener etiquetas innecesarias y/o demasiado anidadas
+
 - Idealmente, el JSX no debería estar indentado mas de 5 tabs
 
 - Siempre que sea posible, usar el patrón early return para evitar ifs anidados
@@ -58,6 +62,9 @@ Es recomendable también usar PropTypes. Además de proveer un mínimo tipado, n
 
 - Usar initialValues en estados
 
+- Nombrar variables y estados de manera significativa **(7)**
+
+- Escribir estilos de manera dinámica. Preferir usar ``theme.spacing(unit)`` de MUI en lugar de otras unidades de medida.
 
 ## En un mundo ideal:
 
@@ -291,4 +298,86 @@ const calcTotal = (params) => {
 
 // De esta manera podemos extraer lógica del componente
 // para (entre otras cosas) facilitar la lectura
+```
+
+### Evitar la horizontalidad del código. (6)
+##### BAD:
+```javascript
+const SomeComponent = (props) => {
+
+    const { isUser } = props;
+
+    return (
+        <Box>
+            {isUser ? <Typography variant={'h2'} style={_username}>{user.name}</Typography> : <Typography variant={'h2'} style={_username}>Not logged in</Typography>}
+            <Button onClick={() => {history.push("/companyHome"); setDrawerOpen(false); }} className={classes.becameHostButton} disabled={false}>Click me</Button>
+        </Box>
+    )
+}
+```
+
+##### GOOD:
+```javascript
+const SomeComponent = (props) => {
+
+    const { isUser } = props;
+
+    return (
+        <Box>
+            {isUser
+                ? <Typography variant={'h2'} style={_username}>{user.name}</Typography>
+                : <Typography variant={'h2'} style={_username}>Not logged in</Typography>
+            }
+
+            <Button
+                onClick={handleClick}
+                className={_button}
+                disabled={false}
+            >
+                Click me
+            </Button>
+        </Box>
+    )
+}
+```
+
+### Nombrar variables y estados de manera significativa. (7)
+##### BAD:
+```javascript
+const SomeComponent = (props) => {
+
+    const [logged, setLogged] = useState({})
+
+    const user = [{ name: 'Foo', id: 1 }, { name: 'Bar', id: 2 }, { name: 'Baz', id: 3 }]
+
+    const favourite = () => {
+        await UserService.getFavourites()
+    }
+
+    return (
+        <Box>
+            ...
+        </Box>
+    )
+}
+```
+
+##### GOOD:
+```javascript
+const SomeComponent = (props) => {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    const users = [{ name: 'Foo', id: 1 }, { name: 'Bar', id: 2 }, { name: 'Baz', id: 3 }]
+
+    const getFavourites = () => {
+        await UserService.getFavourites()
+    }
+
+    return (
+        <Box>
+            ...
+        </Box>
+    )
+}
 ```
